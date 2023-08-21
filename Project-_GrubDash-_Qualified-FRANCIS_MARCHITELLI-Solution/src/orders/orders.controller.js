@@ -14,6 +14,7 @@ function bodyHasProperty(propertyName) {
   return function(req, res, next) {
     const {data = {}} = req.body;
     if(data[propertyName]) {
+      res.locals.mobileNumber = propertyName;
       return next();
     }
     console.log("this is a test", propertyName);
@@ -112,6 +113,7 @@ function statusPropertyValid(req, res, next) {
   const {data: {status} = {}} = req.body;
   const validStatus = ["pending", "preparing", "out-for-delivery", "delivered"];
   if(validStatus.includes(status)) {
+    res.locals.status = status;
     return next();
   }
   next({

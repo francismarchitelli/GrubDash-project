@@ -14,6 +14,7 @@ function bodyHasProperty(propertyName) {
   return function(req, res, next) {
     const {data = {}} = req.body;
     if(data[propertyName]) {
+      res.locals.description = propertyName;
       return next();
     }
     next({
@@ -114,3 +115,4 @@ module.exports = {
   ],
 };
 // TODO: Implement the /dishes handlers needed to make the tests pass
+
